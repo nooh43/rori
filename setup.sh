@@ -1,13 +1,13 @@
 #!/bin/bash
 # Ruby On Rails initializer - RORi
-# Version : V 0.5.0
+# Version : V 0.6.0
 # Author  : Nasser Alhumood
 # .-.    . . .-.-.
 # |.|.-.-|-.-|-`-..-,.-.. .
 # `-``-`-'-' ' `-'`'-'   `
 
 # Some Unnecessary Variables, but they're here anyway
-version=V0.5.0
+version=V0.6.0
 oss="CentOs7, RHEL7"
 dir=/etc/profile.d/rvm_secure_path.sh
 

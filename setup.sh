@@ -16,8 +16,8 @@ clear
 
 # Welcome Massage
 echo -e "\e[1;34;1m+=================================\e[0m"
-echo -e "\e[1;34;1m+\e[0m" "Ruby On Rails initializer -  `$version`"
-echo -e "\e[1;34;1m+\e[0m" "supported operating systems: `$oss`"
+echo -e "\e[1;34;1m+\e[0m" "Ruby On Rails initializer -  " $version
+echo -e "\e[1;34;1m+\e[0m" "supported operating systems: " $oss
 echo -e "\e[1;34;1m+=================================\e[0m"
 echo
 echo
@@ -28,6 +28,7 @@ then
   echo -e "Cool you are in step \e[31;1mtwo\e[0m now! I have to remind you this could take some time."
   echo "You should be patient if you want to continue..."
   # Making sure you wanna continue
+  echo
   read -p "would you like to continue ? [y/N] "
   echo
   if [[ ! $REPLY =~ ^[Yy]$ ]]
@@ -43,14 +44,14 @@ then
     rvm --default use ruby
     gem install bundler --no-rdoc --no-ri
   } > log/out5.log 2> log/err5.log
-  echo -e "INSTALL RUBY                [[\e[1;37;1;1;42m   +done   \e[0m]]"
+  echo -e "INSTALL RUBY                [\e[1;37;1;1;42m   +done   \e[0m]"
 
   # Step 7 : install node js and npm
   echo -e "INSTALL NODE JS             [\e[1;30;1;1;47min progress\e[0m]"
   {
     sudo yum install -y --enablerepo=epel nodejs npm
   } > log/out6.log 2> log/err6.log
-  echo -e "INSTALL NODE JS             [[\e[1;37;1;1;42m   +done   \e[0m]]"
+  echo -e "INSTALL NODE JS             [\e[1;37;1;1;42m   +done   \e[0m]"
 
   # Step 8 : prepare for Passenger installation
   echo -e "PRE-PASSENGER INSTALLATION  [\e[1;30;1;1;47min progress\e[0m]"
@@ -63,7 +64,7 @@ then
     sudo ntpdate pool.ntp.org
     sudo service ntpd start
   } > log/out7.log 2> log/err7.log
-  echo -e "PRE-PASSENGER INSTALLATION  [[\e[1;37;1;1;42m   +done   \e[0m]]"
+  echo -e "PRE-PASSENGER INSTALLATION  [\e[1;37;1;1;42m   +done   \e[0m]"
 
   # Step 9 : install Passenger and apache
   echo -e "INSTALL PASSENGER & APACHE  [\e[1;30;1;1;47min progress\e[0m]"
@@ -74,14 +75,14 @@ then
     sudo systemctl restart httpd
     sudo yum update
   } > log/out8.log 2> log/err8.log
-  echo -e "INSTALL PASSENGER & APACHE  [[\e[1;37;1;1;42m   +done   \e[0m]]"
+  echo -e "INSTALL PASSENGER & APACHE  [\e[1;37;1;1;42m   +done   \e[0m]"
 
   # Step 10: install git
   echo -e "INSTALL GIT                 [\e[1;30;1;1;47min progress\e[0m]"
   {
     sudo yum install -y git
   } > log/out9.log 2> log/err9.log
-  echo -e "INSTALL GIT                 [[\e[1;37;1;1;42m   +done   \e[0m]]"
+  echo -e "INSTALL GIT                 [\e[1;37;1;1;42m   +done   \e[0m]"
 
   # Step 11: setting up the directory
   echo -e "DIRECTORY SETTING           [\e[1;30;1;1;47min progress\e[0m]"
@@ -92,18 +93,24 @@ then
     rvm use ruby
     gem install rails
   } > log/out10.log 2> log/err10.log
-  echo -e "DIRECTORY SETTING           [[\e[1;37;1;1;42m   +done   \e[0m]]"
+  echo -e "DIRECTORY SETTING           [\e[1;37;1;1;42m   +done   \e[0m]"
 
   # Thank you message
   echo
   echo
   echo "Thank you for using this script, ruby on rails should be installed in your system now!"
+
+  # Clear history
+  history -c
+
+  # Exit
   exit 0
 fi
 
 # Making sure you wanna continue
-echo "This script could take some time, don't close the application and wait unil it is completed."
+echo "Don't close the application and wait unil it is completed."
 echo "You should be patient if you want to continue..."
+echo
 read -p "would you like to continue ? [y/N] "
 echo
 if [[ ! $REPLY =~ ^[Yy]$ ]]
@@ -112,12 +119,15 @@ then
   exit 0
 fi
 
+# create log folder
+mkdir log
+
 # Step 1 : Updating the systems
 echo -e "SYSTEM UPDATE               [\e[1;30;1;1;47min progress\e[0m]"
 {
   sudo yum -y update
 } > log/out1.log 2> log/err1.log
-echo -e "SYSTEM UPDATE               [[\e[1;37;1;1;42m   +done   \e[0m]]"
+echo -e "SYSTEM UPDATE               [\e[1;37;1;1;42m   +done   \e[0m]"
 
 # Step 2 : installing epel
 echo -e "EPEL INSTALLATION           [\e[1;30;1;1;47min progress\e[0m]"
@@ -126,14 +136,14 @@ echo -e "EPEL INSTALLATION           [\e[1;30;1;1;47min progress\e[0m]"
   sudo yum -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
   sudo yum -y update
 } > log/out2.log 2> log/err2.log
-echo -e "EPEL INSTALLATION           [[\e[1;37;1;1;42m   +done   \e[0m]]"
+echo -e "EPEL INSTALLATION           [\e[1;37;1;1;42m   +done   \e[0m]"
 
 # Step 3 : Prepare the system and install dependencies
 echo -e "INSTALL DEPENDENCIES        [\e[1;30;1;1;47min progress\e[0m]"
 {
   sudo yum install -y curl gpg gcc gcc-c++ make
 } > log/out3.log 2> log/err3.log
-echo -e "INSTALL DEPENDENCIES        [[\e[1;37;1;1;42m   +done   \e[0m]]"
+echo -e "INSTALL DEPENDENCIES        [\e[1;37;1;1;42m   +done   \e[0m]"
 
 # Step 4 : install rvm
 echo -e "INSTALL RVM                 [\e[1;30;1;1;47min progress\e[0m]"
@@ -143,7 +153,9 @@ echo -e "INSTALL RVM                 [\e[1;30;1;1;47min progress\e[0m]"
   sudo usermod -a -G rvm `whoami`
   if sudo grep -q secure_path /etc/sudoers; then sudo sh -c "echo export rvmsudo_secure_path=1 >> /etc/profile.d/rvm_secure_path.sh" && echo Environment variable installed; fi
 } > log/out4.log 2> log/err4.log
-echo -e "INSTALL RVM                 [[\e[1;37;1;1;42m   +done   \e[0m]]"
+echo -e "INSTALL RVM                 [\e[1;37;1;1;42m   +done   \e[0m]"
 
 # Step 5 : ask to logout and login again to continue
+echo
+echo
 echo -e "\e[31;1mAwesome we are half way through it, now you have to logout from the terminal then login again\e[0m"
